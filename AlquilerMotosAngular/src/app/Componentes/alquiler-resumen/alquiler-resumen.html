@@ -1,0 +1,114 @@
+<div class="alquiler-layout">
+
+  <!-- ========================= -->
+  <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+  <!-- ========================= -->
+  <div class="col-izquierda">
+
+    <div class="eco-card">
+      <div class="card-header">🌿 Nuevo Alquiler</div>
+
+      <div class="card-body">
+
+        <!-- Cliente -->
+        <label class="form-label">Cliente</label>
+        <select class="form-select" [(ngModel)]="clienteId" (change)="calcularResumen()">
+          <option [ngValue]="null" disabled>Seleccione un cliente</option>
+          <option *ngFor="let c of clientes$ | async" [value]="c.id">
+            {{c.nombre}} <span *ngIf="c.esFrecuente">⭐</span>
+          </option>
+        </select>
+
+        <!-- Vehículo -->
+        <label class="form-label">Vehículo Ecológico</label>
+        <select class="form-select" [(ngModel)]="vehiculoCod" (change)="calcularResumen()">
+          <option [ngValue]="null" disabled>Seleccione vehículo</option>
+          <option *ngFor="let v of vehiculos$ | async"
+                  [value]="v.codigo"
+                  [disabled]="v.estado === 'ALQUILADO'">
+            {{v.nombre}} - {{v.tarifaDia | currency}}/día
+          </option>
+        </select>
+
+        <!-- Fechas -->
+        <div class="fechas">
+          <div>
+            <label class="form-label">Inicio</label>
+            <input type="date" class="form-input" [(ngModel)]="fInicio" (change)="calcularResumen()">
+          </div>
+
+          <div>
+            <label class="form-label">Devolución</label>
+            <input type="date" class="form-input" [(ngModel)]="fTentativa" (change)="calcularResumen()">
+          </div>
+        </div>
+
+        <!-- BOTÓN -->
+        <button class="btn-submit" (click)="registrar()">
+          PROCESAR ALQUILER
+        </button>
+
+        <!-- MENSAJE -->
+        <div *ngIf="mensaje" class="alert">
+          {{mensaje}}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- TABLA DE TARIFAS -->
+    <!-- ========================= -->
+    <h4 class="tabla-title">📘 Tarifas y Requisitos</h4>
+
+    <table class="tabla-detalle">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Vehículo</th>
+          <th>Tarifa</th>
+          <th>Edad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vehiculos$ | async">
+          <td>{{ v.codigo }}</td>
+          <td>{{ v.nombre }}</td>
+          <td>${{ v.tarifaDia }} por día</td>
+          <td>{{ v.requiereEdad ? 'Mayor de Edad' : 'Cualquier edad' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- COLUMNA DERECHA: RESUMEN -->
+  <!-- ========================= -->
+  <div class="col-derecha">
+
+    <div *ngIf="resumen" class="resumen-card">
+      <h3>📘 Resumen del Alquiler</h3>
+
+      <div class="row"><span class="label">Cliente:</span> <span>{{ resumen.cliente }}</span></div>
+      <div class="row"><span class="label">Vehículo:</span> <span>{{ resumen.vehiculo }}</span></div>
+      <div class="row"><span class="label">Días:</span> <span>{{ resumen.dias }}</span></div>
+
+      <hr>
+
+      <div class="row"><span class="label">Importe:</span> <span>{{ resumen.importe | currency }}</span></div>
+      <div class="row"><span class="label">Desc. Extendido:</span> <span>{{ resumen.descExtendido | currency }}</span></div>
+      <div class="row"><span class="label">Desc. Frecuente:</span> <span>{{ resumen.descFrecuente | currency }}</span></div>
+      <div class="row"><span class="label">Depósito:</span> <span>{{ resumen.deposito | currency }}</span></div>
+
+      <hr>
+
+      <div class="row total">
+        <span class="label">TOTAL A PAGAR:</span>
+        <span>{{ resumen.total | currency }}</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>

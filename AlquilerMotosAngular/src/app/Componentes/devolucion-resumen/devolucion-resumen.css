@@ -1,0 +1,120 @@
+/* ======= LAYOUT DOS COLUMNAS ======= */
+
+.layout {
+  display: flex;
+  gap: 20px;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 1.2;
+  position: sticky;
+  top: 20px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+}
+
+/* ======= TABLA ======= */
+
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.header {
+  background: #d97706;
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.btn-return {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-return:hover {
+  background: #b91c1c;
+}
+
+/* ======= RESUMEN ======= */
+
+.resumen-card {
+  background: #fff7ed;
+  border: 1px solid #fbbf24;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.resumen-card h3 {
+  color: #b45309;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.lbl {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d6d3d1;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.label {
+  font-weight: bold;
+  color: #92400e;
+}
+
+.total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #b45309;
+}
+
+.btn-confirm {
+  margin-top: 1rem;
+  width: 100%;
+  background: #f59e0b;
+  color: white;
+  font-weight: bold;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-confirm:hover {
+  background: #d97706;
+}

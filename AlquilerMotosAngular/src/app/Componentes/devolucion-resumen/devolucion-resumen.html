@@ -1,0 +1,88 @@
+<div class="layout">
+
+  <!-- ========================= -->
+  <!-- IZQUIERDA: TABLA PENDIENTES -->
+  <!-- ========================= -->
+  <div class="left">
+
+    <div class="table-container">
+      <div class="header">📋 Devoluciones Pendientes</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Vehículo</th>
+            <th>Cliente</th>
+            <th>Tentativa</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let a of alquileres$ | async">
+            <ng-container *ngIf="a.estado === 'ACTIVO'">
+
+              <td>{{a.vehiculoCodigo}}</td>
+              <td>{{a.clienteNombre}}</td>
+              <td>{{a.fechaTentativa | date:'dd/MM/yyyy'}}</td>
+
+              <td>
+                <button class="btn-return" (click)="devolver(a)">
+                  Recibir
+                </button>
+              </td>
+
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- DERECHA: RESUMEN -->
+  <!-- ========================= -->
+  <div class="right" *ngIf="seleccionado">
+
+    <div class="resumen-card">
+
+      <h3>📘 Procesar Devolución</h3>
+
+      <label class="lbl">Fecha Real de Devolución</label>
+      <input type="date" [(ngModel)]="fechaReal" class="input" (change)="calcular()">
+
+      <hr>
+
+      <div *ngIf="resumen">
+
+        <div class="row"><span class="label">Cliente:</span> <span>{{resumen.cliente}}</span></div>
+        <div class="row"><span class="label">Vehículo:</span> <span>{{resumen.vehiculo}}</span></div>
+        <div class="row"><span class="label">Días:</span> <span>{{resumen.dias}}</span></div>
+        <div class="row"><span class="label">Días Mora:</span> <span>{{resumen.diasMora}}</span></div>
+
+        <hr>
+
+        <div class="row"><span class="label">Importe:</span> <span>{{resumen.importe | currency}}</span></div>
+        <div class="row"><span class="label">Desc. Extendido:</span> <span>{{resumen.descExt | currency}}</span></div>
+        <div class="row"><span class="label">Desc. Frecuente:</span> <span>{{resumen.descFrecuente | currency}}</span></div>
+        <div class="row"><span class="label">Depósito:</span> <span>{{resumen.deposito | currency}}</span></div>
+        <div class="row"><span class="label">Multa:</span> <span>{{resumen.multa | currency}}</span></div>
+        <div class="row"><span class="label">Depósito Devuelto:</span> <span>{{resumen.depositoDevuelto | currency}}</span></div>
+
+        <hr>
+
+        <div class="row total">
+          <span class="label">SUBTOTAL FINAL:</span>
+          <span>{{resumen.subtotalFinal | currency}}</span>
+        </div>
+
+        <button class="btn-confirm" (click)="confirmar()">CONFIRMAR DEVOLUCIÓN</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

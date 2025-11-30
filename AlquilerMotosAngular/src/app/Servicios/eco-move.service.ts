@@ -129,4 +129,109 @@ export class EcoMoveService {
     this.vehiculos$.next([...this.vehiculos]);
     this.alquileres$.next([...this.alquileres]);
   }
+
+  // ===== CRUD CLIENTES =====
+crearCliente(cliente: any) {
+  this.clientes.push(cliente);
+  this.clientes$.next([...this.clientes]);
+}
+
+eliminarCliente(id: number) {
+  this.clientes = this.clientes.filter(c => c.id !== id);
+  this.clientes$.next([...this.clientes]);
+}
+
+// ===== CRUD VEHICULOS =====
+crearVehiculo(vehiculo: any) {
+  this.vehiculos.push(vehiculo);
+  this.vehiculos$.next([...this.vehiculos]);
+}
+
+eliminarVehiculo(codigo: string) {
+  this.vehiculos = this.vehiculos.filter(v => v.codigo !== codigo);
+  this.vehiculos$.next([...this.vehiculos]);
+}
+
+// ===== CRUD EXTRA PARA ADMINISTRAR =====
+eliminarAlquiler(id: number) {
+  // Buscamos el alquiler para liberar el vehículo si estaba activo
+  const alquiler = this.alquileres.find(a => a.id === id);
+  if (alquiler && alquiler.estado === 'ACTIVO') {
+     const vehiculo = this.vehiculos.find(v => v.codigo === alquiler.vehiculoCodigo);
+     if (vehiculo) vehiculo.estado = 'DISPONIBLE';
+  }
+  
+  this.alquileres = this.alquileres.filter(a => a.id !== id);
+  this.alquileres$.next([...this.alquileres]);
+  this.notificarCambios(); // Asegura actualizar vehículos también
+}
+
+// =====================================================
+// 1. Clientes que alquilaron más de un vehículo
+// =====================================================
+getClientesConMasDeUnAlquiler() {
+  const conteo = this.alquileres.reduce((acc, a) => {
+    acc[a.clienteId] = (acc[a.clienteId] || 0) + 1;
+    return acc;
+  }, {} as any);
+
+  return this.clientes
+    .filter(c => conteo[c.id] > 1)
+    .map(c => ({
+      ...c,
+      cantidad: conteo[c.id]
+    }));
+}
+
+// =====================================================
+// 2. Vehículos más alquilados (ordenados)
+// =====================================================
+getVehiculosMasAlquilados() {
+  const conteo = this.alquileres.reduce((acc, a) => {
+    acc[a.vehiculoCodigo] = (acc[a.vehiculoCodigo] || 0) + 1;
+    return acc;
+  }, {} as any);
+
+  return Object.entries(conteo)
+    .sort(([,a]: any, [,b]: any) => b - a)
+    .map(([codigo, cantidad]) => ({
+      ...this.vehiculos.find(v => v.codigo === codigo),
+      cantidad
+    }));
+}
+
+// =====================================================
+// 3. Alquileres con AMBOS descuentos
+// =====================================================
+getAlquileresConDescuentosCompletos() {
+  return this.alquileres.filter(a =>
+    a.descuentoExtendido > 0 && a.descuentoFrecuente > 0
+  );
+}
+
+// =====================================================
+// 4. Total recaudado = neto + depósitos + multas
+// =====================================================
+getTotalRecaudadoGeneral() {
+  return this.alquileres.reduce((total, a) => {
+    const neto = a.importeBase - a.descuentoExtendido - a.descuentoFrecuente;
+    return total + neto + a.deposito + (a.multa || 0);
+  }, 0);
+}
+
+// =====================================================
+// 5. Clientes con multa > depósito
+// =====================================================
+getClientesConMultaMayorDeposito() {
+  return this.alquileres
+    .filter(a => (a.multa || 0) > a.deposito)
+    .map(a => ({
+      cliente: this.clientes.find(c => c.id === a.clienteId),
+      vehiculo: a.vehiculoCodigo,
+      multa: a.multa,
+      deposito: a.deposito
+    }));
+}
+
+
 }

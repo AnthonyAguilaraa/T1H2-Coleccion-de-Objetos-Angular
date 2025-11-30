@@ -43,3 +43,15 @@ footer {
   padding: 1.5rem;
   margin-top: auto;
 }
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-weight: bold;
+}
+.admin-link {
+  border: 1px solid #fab005;
+  color: #fab005 !important;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}

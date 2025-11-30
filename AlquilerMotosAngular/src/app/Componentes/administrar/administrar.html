@@ -1,0 +1,111 @@
+<div class="admin-container">
+  
+  <div class="admin-header">
+    <h2>⚙️ Panel de Administración</h2>
+    <button *ngIf="vistaActual !== 'MENU'" (click)="cambiarVista('MENU')" class="btn-back">
+      ⬅ Volver al Menú
+    </button>
+  </div>
+
+  <div *ngIf="vistaActual === 'MENU'" class="dashboard-grid">
+    
+    <div class="card-menu" (click)="cambiarVista('CLIENTES')">
+      <div class="icon">👤</div>
+      <h3>Gestión Clientes</h3>
+      <p>Crear y eliminar clientes</p>
+    </div>
+
+    <div class="card-menu" (click)="cambiarVista('VEHICULOS')">
+      <div class="icon">🚲</div>
+      <h3>Gestión Vehículos</h3>
+      <p>Flota y tarifas</p>
+    </div>
+
+    <div class="card-menu" (click)="cambiarVista('ALQUILERES')">
+      <div class="icon">📅</div>
+      <h3>Gestión Alquileres</h3>
+      <p>Historial y cancelaciones</p>
+    </div>
+
+    <div class="card-menu" (click)="cambiarVista('DEVOLUCIONES')">
+      <div class="icon">✅</div>
+      <h3>Historial Devoluciones</h3>
+      <p>Ver finalizados</p>
+    </div>
+
+  </div>
+
+  <div *ngIf="vistaActual === 'CLIENTES'" class="crud-panel">
+    <h3>👤 Administrar Clientes</h3>
+    <div class="form-row">
+      <input class="input" placeholder="ID" type="number" [(ngModel)]="nuevoCliente.id">
+      <input class="input" placeholder="Nombre" [(ngModel)]="nuevoCliente.nombre">
+      <input class="input" placeholder="Edad" type="number" [(ngModel)]="nuevoCliente.edad">
+      <label><input type="checkbox" [(ngModel)]="nuevoCliente.esFrecuente"> Frecuente</label>
+      <button (click)="crearCliente()">Agregar</button>
+    </div>
+    <ul class="list-group">
+      <li *ngFor="let c of clientes$ | async">
+        {{c.id}} - {{c.nombre}} ({{c.edad}}) 
+        <span class="tag" *ngIf="c.esFrecuente">VIP</span>
+        <button class="btn-delete" (click)="eliminarCliente(c.id)">🗑️</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="vistaActual === 'VEHICULOS'" class="crud-panel">
+    <h3>🚲 Administrar Vehículos</h3>
+    <div class="form-row">
+      <input class="input" placeholder="Cód" [(ngModel)]="nuevoVehiculo.codigo">
+      <input class="input" placeholder="Nombre" [(ngModel)]="nuevoVehiculo.nombre">
+      <input class="input" placeholder="Tarifa" type="number" [(ngModel)]="nuevoVehiculo.tarifaDia">
+      <label><input type="checkbox" [(ngModel)]="nuevoVehiculo.requiereEdad"> +18</label>
+      <button (click)="crearVehiculo()">Agregar</button>
+    </div>
+    <ul class="list-group">
+      <li *ngFor="let v of vehiculos$ | async">
+        [{{v.codigo}}] {{v.nombre}} - ${{v.tarifaDia}}
+        <span [class]="v.estado">{{v.estado}}</span>
+        <button class="btn-delete" (click)="eliminarVehiculo(v.codigo)">🗑️</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="vistaActual === 'ALQUILERES'" class="crud-panel">
+    <h3>📅 Todos los Alquileres (Activos)</h3>
+    <table class="admin-table">
+      <thead><tr><th>ID</th><th>Cliente</th><th>Vehículo</th><th>Estado</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let a of alquileres$ | async">
+          <ng-container *ngIf="a.estado === 'ACTIVO'">
+            <td>{{a.id}}</td>
+            <td>{{a.clienteId}}</td>
+            <td>{{a.vehiculoCodigo}}</td>
+            <td class="status-active">En Curso</td>
+            <td><button class="btn-delete" (click)="eliminarAlquiler(a.id)">Cancelar</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="vistaActual === 'DEVOLUCIONES'" class="crud-panel">
+    <h3>✅ Historial de Finalizados</h3>
+    <table class="admin-table">
+      <thead><tr><th>ID</th><th>Cliente</th><th>Vehículo</th><th>Devolución</th><th>Multa</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let a of alquileres$ | async">
+          <ng-container *ngIf="a.estado === 'FINALIZADO'">
+            <td>{{a.id}}</td>
+            <td>{{a.clienteId}}</td>
+            <td>{{a.vehiculoCodigo}}</td>
+            <td>{{a.fechaDevolucionReal | date:'shortDate'}}</td>
+            <td>{{a.multa | currency}}</td>
+            <td><button class="btn-delete" (click)="eliminarAlquiler(a.id)">Borrar</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

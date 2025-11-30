@@ -1,0 +1,58 @@
+.admin-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #d1fae5;
+}
+
+h3 {
+  color: #065f46;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem;
+}
+
+button {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.admin-container { padding: 2rem; max-width: 1000px; margin: 0 auto; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.btn-back { background: #6b7280; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
+
+/* Tarjetas del Menú */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.card-menu {
+  background: white; padding: 2rem; border-radius: 12px;
+  text-align: center; cursor: pointer; border: 1px solid #e5e7eb;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-menu:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #10b981; }
+.card-menu .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+/* Tablas y Listas */
+.crud-panel { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+.list-group { list-style: none; padding: 0; }
+.list-group li { padding: 0.8rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.admin-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.admin-table th, .admin-table td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #eee; }
+.btn-delete { background: #ef4444; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; }
+
+.DISPONIBLE { color: green; font-weight: bold; }
+.ALQUILADO { color: orange; font-weight: bold; }

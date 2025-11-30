@@ -1,0 +1,39 @@
+.report-card {
+  background: #f0fdf4;
+  border: 1px solid #a7f3d0;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+h3 {
+  color: #047857;
+  margin-bottom: 1rem;
+}
+
+.report-item {
+  margin-bottom: 1rem;
+}
+
+.report-item strong {
+  color: #065f46;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #d1fae5;
+}
+
+.highlight {
+  background: #ecfdf5;
+  padding: 0.8rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
