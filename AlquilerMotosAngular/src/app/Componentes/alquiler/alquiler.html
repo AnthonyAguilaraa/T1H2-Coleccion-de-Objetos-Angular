@@ -1,1 +1,29 @@
-<p>alquiler works!</p>
+<div class="eco-card">
+  <h3 class="eco-title">Nuevo Alquiler</h3>
+
+  <label>Cliente</label>
+  <select [(ngModel)]="clienteId">
+    <option *ngFor="let c of clientes$ | async" [value]="c.id">
+      {{c.nombre}} ({{c.esFrecuente ? 'Frecuente' : 'Nuevo'}})
+    </option>
+  </select>
+
+  <label>Vehículo</label>
+  <select [(ngModel)]="vehiculoCod">
+    <option *ngFor="let v of vehiculos$ | async"
+            [value]="v.codigo"
+            [disabled]="v.estado === 'ALQUILADO'">
+      {{v.nombre}} - {{v.estado}}
+    </option>
+  </select>
+
+  <label>Inicio</label>
+  <input type="date" [(ngModel)]="fInicio">
+
+  <label>Tentativa Fin</label>
+  <input type="date" [(ngModel)]="fTentativa">
+
+  <button (click)="registrar()">Guardar</button>
+
+  <p class="eco-msg">{{mensaje}}</p>
+</div>
