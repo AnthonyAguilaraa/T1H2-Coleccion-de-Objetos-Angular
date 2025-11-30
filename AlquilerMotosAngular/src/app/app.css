@@ -1,0 +1,45 @@
+.app-header {
+  background: #064e3b;
+  color: white;
+  padding: 1rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+}
+
+.nav-link.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+main {
+  min-height: 85vh;
+  background: #f3f4f6;
+  padding-bottom: 2rem;
+}
+
+footer {
+  background: #1f2937;
+  color: #9ca3af;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}

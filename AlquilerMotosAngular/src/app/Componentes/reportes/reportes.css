@@ -1,0 +1,50 @@
+.stats-card {
+  background: #f0fdf4;
+  border: 1px dashed #10b981;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+h4 {
+  color: #064e3b;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.stat-item {
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  color: #059669;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #065f46;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #d1fae5;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.btn-refresh {
+  background: none;
+  border: none;
+  color: #059669;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 1rem;
+}

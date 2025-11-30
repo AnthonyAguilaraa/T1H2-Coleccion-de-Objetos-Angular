@@ -1,1 +1,29 @@
-<p>devolucion works!</p>
+<div class="table-container">
+  <div class="header">📋 Devoluciones Pendientes</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Vehículo</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let a of alquileres$ | async">
+        <ng-container *ngIf="a.estado === 'ACTIVO'">
+          <td>{{a.vehiculoCodigo}}</td>
+          <td>{{a.fechaTentativa | date:'dd/MM/yyyy'}}</td>
+          <td class="activo">En Curso</td>
+          <td>
+            <button class="btn-return" (click)="devolver(a.id)">
+              Recibir
+            </button>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

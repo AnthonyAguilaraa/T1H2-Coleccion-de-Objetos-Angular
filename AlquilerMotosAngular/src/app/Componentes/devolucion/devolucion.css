@@ -1,0 +1,27 @@
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.header {
+  background: #d97706;
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td { padding: 1rem; border-bottom: 1px solid #e5e7eb; }
+
+.activo { color: #059669; font-weight: bold; }
+
+.btn-return {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}

@@ -1,20 +1,19 @@
-<main class="layout-wrapper">
-  <header [routerLink]="['/']" class="header-brand">
-    <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
-  </header>
+<header class="app-header">
+  <div class="container">
+    <span class="logo">🌱 Eco-Move</span>
 
-  <section class="main-content">
-    <router-outlet></router-outlet>
-  </section>
+    <nav>
+      <a routerLink="/" class="nav-link">Inicio</a>
+      <!-- <a class="nav-link disabled">Flota</a>
+      <a class="nav-link disabled">Soporte</a> -->
+    </nav>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
 </main>
 
-<footer class="footer">
-  <div class="footer-container">
-    <a class="footer-brand">
-      <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true">
-    </a>
-    <p class="footer-text">
-      ©Programacion Angular
-    </p>
-  </div>
+<footer>
+  <p>© 2024 Eco-Move S.A. - Desarrollado con Angular</p>
 </footer>

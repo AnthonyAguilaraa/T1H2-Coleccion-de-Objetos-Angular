@@ -1,36 +1,65 @@
 .eco-card {
-  background: #e6fff2;
+  background: white;
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 0 10px #2ecc71;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
 }
 
-.eco-title {
-  color: #0f5132;
-  text-align: center;
-}
-
-select, input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-
-button {
-  width: 100%;
-  background: #2ecc71;
+.card-header {
+  background: #059669;
   color: white;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.card-body { padding: 1.5rem; }
+
+.form-label {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-select, .form-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.form-select:focus, .form-input:focus {
+  outline: none;
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.fechas {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-submit {
+  width: 100%;
+  background: #10b981;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #27ae60;
-}
+.btn-submit:hover { background: #047857; }
 
-.eco-msg {
-  margin-top: 10px;
-  color: #0f5132;
+.alert {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #ecfdf5;
+  color: #065f46;
+  border-radius: 6px;
+  text-align: center;
 }

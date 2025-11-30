@@ -1,29 +1,45 @@
 <div class="eco-card">
-  <h3 class="eco-title">Nuevo Alquiler</h3>
+  <div class="card-header">🌿 Nuevo Alquiler</div>
 
-  <label>Cliente</label>
-  <select [(ngModel)]="clienteId">
-    <option *ngFor="let c of clientes$ | async" [value]="c.id">
-      {{c.nombre}} ({{c.esFrecuente ? 'Frecuente' : 'Nuevo'}})
-    </option>
-  </select>
+  <div class="card-body">
 
-  <label>Vehículo</label>
-  <select [(ngModel)]="vehiculoCod">
-    <option *ngFor="let v of vehiculos$ | async"
-            [value]="v.codigo"
-            [disabled]="v.estado === 'ALQUILADO'">
-      {{v.nombre}} - {{v.estado}}
-    </option>
-  </select>
+    <label class="form-label">Cliente</label>
+    <select class="form-select" [(ngModel)]="clienteId">
+      <option [ngValue]="null" disabled>Seleccione un cliente</option>
+      <option *ngFor="let c of clientes$ | async" [value]="c.id">
+        {{c.nombre}} <span *ngIf="c.esFrecuente">⭐</span>
+      </option>
+    </select>
 
-  <label>Inicio</label>
-  <input type="date" [(ngModel)]="fInicio">
+    <label class="form-label">Vehículo Ecológico</label>
+    <select class="form-select" [(ngModel)]="vehiculoCod">
+      <option [ngValue]="null" disabled>Seleccione vehículo</option>
+      <option *ngFor="let v of vehiculos$ | async"
+              [value]="v.codigo"
+              [disabled]="v.estado === 'ALQUILADO'">
+        {{v.nombre}} - {{v.precioDia | currency}}/día
+      </option>
+    </select>
 
-  <label>Tentativa Fin</label>
-  <input type="date" [(ngModel)]="fTentativa">
+    <div class="fechas">
+      <div>
+        <label class="form-label">Inicio</label>
+        <input type="date" class="form-input" [(ngModel)]="fInicio">
+      </div>
 
-  <button (click)="registrar()">Guardar</button>
+      <div>
+        <label class="form-label">Devolución</label>
+        <input type="date" class="form-input" [(ngModel)]="fTentativa">
+      </div>
+    </div>
 
-  <p class="eco-msg">{{mensaje}}</p>
+    <button class="btn-submit" (click)="registrar()">
+      PROCESAR ALQUILER
+    </button>
+
+    <div *ngIf="mensaje" class="alert">
+      {{mensaje}}
+    </div>
+
+  </div>
 </div>

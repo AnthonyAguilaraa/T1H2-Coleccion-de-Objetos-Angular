@@ -1,1 +1,21 @@
-<p>reportes works!</p>
+<div class="stats-card">
+  <h4>📊 Estadísticas Eco-Move</h4>
+
+  <div class="stat-item">
+    <div class="stat-label">CAJA TOTAL RECAUDADA</div>
+    <div class="stat-value">{{ totalDinero | currency }}</div>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-label">CLIENTES VIP (Frecuentes)</div>
+    <ul>
+      <li *ngFor="let c of recurrentes">
+        👑 {{ c.nombre }}
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn-refresh" (click)="actualizar()">
+    🔄 Actualizar datos
+  </button>
+</div>
